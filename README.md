@@ -142,8 +142,12 @@ limitations under the License.
 
 </details>
 
-```bash
-Author Information
-------------------
-Patrick Hermann, stuttgart-things 03/2025
+```yaml
+---
+name: homerun-chaos-catcher
+init: 03/2025
+project: stuttgart-things
+family: homerun
+authors:
+  - Patrick Hermann
 ```
