@@ -142,6 +142,8 @@ limitations under the License.
 
 </details>
 
+```bash
 Author Information
 ------------------
 Patrick Hermann, stuttgart-things 03/2025
+```
