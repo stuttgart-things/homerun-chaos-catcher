@@ -1,5 +1,7 @@
 # stuttgart-things/homerun-chaos-catcher
 
+creates chaos in kubernetes clusters based on homerun notifications.
+
 ## USAGE
 
 <details><summary>CONFIG EXMAPLE</summary>
@@ -51,7 +53,7 @@ homerun-chaos-catcher
 
 ## DEPLOYMENT
 
-<details><summary>GITHUB RELEASE</summary>
+<details><summary>BY GITHUB RELEASE</summary>
 
 ```bash
 VERSION=v1.3.0
