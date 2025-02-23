@@ -83,24 +83,27 @@ tasks:
         if [[ -n $(git status --porcelain) ]]; then
           echo "committing changes"
           echo "ENTER COMMIT MESSAGE"
-          read COMMIT_MESSAGE;
+          COMMIT_MESSAGE=$(echo $(gum choose "feat: {{ .BRANCH }}" "fix: {{ .BRANCH }}" "BREAKING CHANGE: {{ .BRANCH }}" "ENTER CUSTOM COMMIT MESSAGE"))
+
+          if [ "$COMMIT_MESSAGE" == "ENTER CUSTOM COMMIT MESSAGE" ]; then
+            COMMIT_MESSAGE=$(echo $(gum input --placeholder "scope" --value "commit to {{ .BRANCH }}"))
+          fi
+
           git commit --allow-empty -a -m "$(echo ${COMMIT_MESSAGE})"
         else
           echo "no changes"
         fi
         git push origin -u {{ .BRANCH }}
 
-  mr:
-    desc: Create merge request
+  goreleaser:
+    desc: Release bins w/ goreleaser
     cmds:
-      - task: commit
-      - glab mr create --fill --label {{ .LABELS }} --yes --squash-before-merge
-      - |
-        MR_ID=$(glab mr list --source-branch={{ .BRANCH }} | awk '/!/{print $1}' | tr -d '!' )
-        echo MERGE REQUEST ID: ${MR_ID}
-        glab mr merge -y ${VERSION} --remove-source-branch --squash
-    vars:
-      LABELS: feature
+      - rm -rf ./dist
+      - goreleaser healthcheck
+      - goreleaser check
+      - goreleaser release --skip=publish --snapshot --clean
+      - goreleaser release --clean
+      - rm -rf ./dist
 
   release:
     desc: Push new version
@@ -110,6 +113,9 @@ tasks:
       - npx semantic-release --dry-run
       - npx semantic-release --debug --no-ci
       - echo released version $(git describe --tags --abbrev=0)
+      - npx semantic-release --dry-run
+      - npx semantic-release --debug --no-ci
+      - task: goreleaser
 
   pr:
     desc: Create pull request into main
