@@ -70,6 +70,16 @@ cd -
 
 ## DEV
 
+```yaml
+---
+name: homerun-chaos-catcher
+init: 03/2025
+project: stuttgart-things
+family: homerun
+authors:
+  - Patrick Hermann
+```
+
 <details><summary>CREATE ENV FILE</summary>
 
 .env file needed for Taskfile
@@ -141,13 +151,3 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 </details>
-
-```yaml
----
-name: homerun-chaos-catcher
-init: 03/2025
-project: stuttgart-things
-family: homerun
-authors:
-  - Patrick Hermann
-```
