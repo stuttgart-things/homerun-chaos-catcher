@@ -6,19 +6,15 @@ vars:
   BRANCH:
     sh: if [ $(git rev-parse --abbrev-ref HEAD) != "main" ]; then echo $(git rev-parse --abbrev-ref HEAD); else echo main ; fi
   K8S_ENV: homerun-dev
-  # PATH_HELMFILE: k8s/helmfile.yaml
-  # CHART_DIR: k8s
-  # CHART_VERSION:
-  #   sh: grep 'version:' ./{{ .CHART_DIR }}/{{ .PROJECT_NAME }}/Chart.yaml | head -n1 | awk '{ print $2 }'
   ORGA_NAME: Lab/stuttgart-things/homerun
   MODULE: codehub.sva.de/{{ .ORGA_NAME }}/{{ .PROJECT_NAME }}
-  VERSION:
-    sh: |
-      [ "$(git branch --show-current)" != "main" ] && echo "dev-$(git describe --tags --abbrev=0)" || echo $(git describe --tags --abbrev=0)
   GIT_COMMIT:
     sh: git log -n 1 --format=%h
   DATE:
     sh: date -Ih
+  VERSION:
+    sh: |
+      [ "$(git branch --show-current)" != "main" ] && echo "previewPost-$(git describe --tags --abbrev=0)" || echo $(git describe --tags --abbrev=0)
 
 dotenv: ['.env', '{{.HOME}}/.env']
 
@@ -56,7 +52,7 @@ tasks:
     desc: Install Go Project
     deps: [lint, test]
     cmds:
-      - go install -ldflags="-X {{ .MODULE }}/internal.version={{ .UPDATED_TAG_VERSION }} -X {{ .MODULE }}/internal.date={{ .DATE }} -X {{ .MODULE }}/internal.commit={{ .GIT_COMMIT }}"
+      - go install -ldflags="-X {{ .MODULE }}/internal.version={{ .VERSION }} -X {{ .MODULE }}/internal.date={{ .DATE }} -X {{ .MODULE }}/internal.commit={{ .GIT_COMMIT }}"
 
   branch:
     desc: Create branch from main
