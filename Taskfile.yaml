@@ -113,8 +113,6 @@ tasks:
       - npx semantic-release --dry-run
       - npx semantic-release --debug --no-ci
       - echo released version $(git describe --tags --abbrev=0)
-      - npx semantic-release --dry-run
-      - npx semantic-release --debug --no-ci
       - task: goreleaser
 
   pr:
