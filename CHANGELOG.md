@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/stuttgart-things/homerun-chaos-catcher/compare/v1.1.0...v1.2.0) (2025-02-23)
+
+
+### Features
+
+* fix/gorelease ([b2ece69](https://github.com/stuttgart-things/homerun-chaos-catcher/commit/b2ece69706d06f725624a5ea8c39402db3994569))
+
 # [1.1.0](https://github.com/stuttgart-things/homerun-chaos-catcher/compare/v1.0.0...v1.1.0) (2025-02-23)
 
 
