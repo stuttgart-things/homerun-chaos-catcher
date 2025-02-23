@@ -27,7 +27,7 @@ builds:
       - -s -w -X github.com/stuttgart-things/homerun-chaos-catcher/internal.commit={{.Commit}}
 
 archives:
-  - format: tar.gz
+  - formats: [ 'tar.gz' ]
     # this name template makes the OS and Arch compatible with the results of `uname`.
     name_template: >-
       {{ .ProjectName }}_
@@ -38,8 +38,8 @@ archives:
       {{- if .Arm }}v{{ .Arm }}{{ end }}
     # use zip for windows archives
     format_overrides:
-      - goos: windows
-        format: zip
+      - format_overrides:
+        - formats: [ 'zip' ]
 
 changelog:
   sort: asc
