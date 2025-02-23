@@ -1,0 +1,38 @@
+---
+chaosEvents:
+  chaos1:
+    systems:
+      - tetris # all systems
+    severity:
+      - CHAOS1
+    operation: delete
+    count: 9
+    resource: pod
+    namespace: "*" # random namespace
+  chaos2:
+    systems:
+      - tetris # all systems
+    severity:
+      - CHAOS2
+    operation: add
+    count: 1
+    resource: deployment
+    namespace: "*" # random namespace
+  chaos3:
+    systems:
+      - tetris # all systems
+    severity:
+      - CHAOS3
+    operation: delete
+    count: 1
+    resource: pod
+    namespace: wasteland
+  chaos4:
+    systems:
+      - tetris # all systems
+    severity:
+      - CHAOS4
+    operation: delete
+    count: 1
+    resource: node
+    namespace: "" #clusterwide

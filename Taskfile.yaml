@@ -1,0 +1,98 @@
+---
+version: 3
+vars:
+  PROJECT_NAME:
+    sh: echo ${PWD##*/}
+  BRANCH:
+    sh: if [ $(git rev-parse --abbrev-ref HEAD) != "main" ]; then echo $(git rev-parse --abbrev-ref HEAD); else echo main ; fi
+  K8S_ENV: homerun-dev
+  # PATH_HELMFILE: k8s/helmfile.yaml
+  # CHART_DIR: k8s
+  # CHART_VERSION:
+  #   sh: grep 'version:' ./{{ .CHART_DIR }}/{{ .PROJECT_NAME }}/Chart.yaml | head -n1 | awk '{ print $2 }'
+  ORGA_NAME: Lab/stuttgart-things/homerun
+  MODULE: codehub.sva.de/{{ .ORGA_NAME }}/{{ .PROJECT_NAME }}
+  VERSION:
+    sh: |
+      [ "$(git branch --show-current)" != "main" ] && echo "dev-$(git describe --tags --abbrev=0)" || echo $(git describe --tags --abbrev=0)
+  GIT_COMMIT:
+    sh: git log -n 1 --format=%h
+  DATE:
+    sh: date -Ih
+
+dotenv: ['.env', '{{.HOME}}/.env']
+
+tasks:
+  lint:
+    desc: Lint Golang
+    cmds:
+      - cmd: golangci-lint run
+        ignore_error: true
+
+  run:
+    desc: Run Go Project
+    deps: [install]
+    cmds:
+      - "$GOPATH/bin/{{ .PROJECT_NAME }}"
+    env:
+      PROFILE_PATH: "{{ .PROFILE_PATH }}"
+      REDIS_SERVER: "{{ .REDIS_SERVER }}"
+      REDIS_PORT: "{{ .REDIS_PORT }}"
+      REDIS_PASSWORD: "{{ .REDIS_PASSWORD }}"
+      REDIS_CONSUMER_GROUP: "{{ .REDIS_CONSUMER_GROUP }}"
+      KUBECONFIG: "{{ .PATH_TO_KUBECONFIG }}"
+  test:
+    desc: Test Go Project
+    cmds:
+      - go mod tidy
+      - go test -v
+
+  install:
+    desc: Install Go Project
+    deps: [lint, test]
+    cmds:
+      - go install -ldflags="-X {{ .MODULE }}/internal.version={{ .UPDATED_TAG_VERSION }} -X {{ .MODULE }}/internal.date={{ .DATE }} -X {{ .MODULE }}/internal.commit={{ .GIT_COMMIT }}"
+
+  branch:
+    desc: Create branch from main
+    cmds:
+      - git checkout main
+      - git branch
+      - git pull
+      - |
+        echo "Enter to be created (remote) branch:"
+        read BRANCH_NAME;
+        git checkout -b ${BRANCH_NAME}
+        git push origin ${BRANCH_NAME}
+      - git branch
+      - git branch --set-upstream-to=origin/main ${BRANCH_NAME}
+
+  commit:
+    desc: Commit + push code into branch
+    cmds:
+      - rm -rf dist/
+      - git branch --set-upstream-to=origin/{{ .BRANCH }}
+      - git pull
+      - |
+        git add *
+        if [[ -n $(git status --porcelain) ]]; then
+          echo "committing changes"
+          echo "ENTER COMMIT MESSAGE"
+          read COMMIT_MESSAGE;
+          git commit --allow-empty -a -m "$(echo ${COMMIT_MESSAGE})"
+        else
+          echo "no changes"
+        fi
+        git push origin -u {{ .BRANCH }}
+
+  mr:
+    desc: Create merge request
+    cmds:
+      - task: commit
+      - glab mr create --fill --label {{ .LABELS }} --yes --squash-before-merge
+      - |
+        MR_ID=$(glab mr list --source-branch={{ .BRANCH }} | awk '/!/{print $1}' | tr -d '!' )
+        echo MERGE REQUEST ID: ${MR_ID}
+        glab mr merge -y ${VERSION} --remove-source-branch --squash
+    vars:
+      LABELS: feature
