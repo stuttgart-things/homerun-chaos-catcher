@@ -20,14 +20,11 @@ builds:
       - CGO_ENABLED=0
     goos:
       - linux
-      # - windows
-      # - darwin
 
     ldflags:
       - -s -w -X github.com/stuttgart-things/homerun-chaos-catcher/internal.version={{.Version}}
       - -s -w -X github.com/stuttgart-things/homerun-chaos-catcher/internal.date={{.Date}}
       - -s -w -X github.com/stuttgart-things/homerun-chaos-catcher/internal.commit={{.Commit}}
-
 
 archives:
   - format: tar.gz
