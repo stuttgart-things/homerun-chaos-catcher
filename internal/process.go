@@ -35,7 +35,9 @@ var (
 	redisPassword    = os.Getenv("REDIS_PASSWORD")
 	profilePath      = os.Getenv("PROFILE_PATH")
 	pathToKubeconfig = os.Getenv("KUBECONFIG")
-	logger           = pterm.DefaultLogger.WithLevel(pterm.LogLevelTrace)
+	maxAgeMessages   = os.Getenv("MAX_AGE_MESSAGES")
+
+	logger = pterm.DefaultLogger.WithLevel(pterm.LogLevelTrace)
 )
 
 func ProcessStreams(msg *redisqueue.Message) error {
@@ -75,12 +77,15 @@ func ProcessStreams(msg *redisqueue.Message) error {
 	// CHECK FOR TIMESTAMP
 	ts := sthingsBase.ConvertStringToInteger(eventMessage.Timestamp)
 	timestamp := int64(ts)
-	time_diff, err := strconv.Atoi(os.Getenv("TIME_DIFFERENCE_MESSAGES"))
+	timeDifference, err := strconv.Atoi(maxAgeMessages)
+	if err != nil {
+		fmt.Println("ERROR CONVERTING MAXAGEMESSAGES TO INTEGER")
+	}
 
 	// CREATE KUBERNETES CLIENT (BEFORE EVENT, IF CONNECTION BREAKS)
 	k8sClient := k8s.CreateKubernetesClient(pathToKubeconfig)
 
-	if messageTimeValid(timestamp, int64(time_diff)) {
+	if messageTimeValid(timestamp, int64(timeDifference)) {
 
 		for name, chaosConfig := range config.ChaosEvents {
 

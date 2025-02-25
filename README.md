@@ -42,7 +42,7 @@ export REDIS_PASSWORD=""
 export REDIS_STREAM="homerun"
 export REDIS_CONSUMER_GROUP="homerun-chaos-catcher"
 export PROFILE_PATH="chaos.yaml"
-export TIME_DIFFERENCE_MESSAGES=10
+export MAX_AGE_MESSAGES=10
 export KUBECONFIG="/home/sthings/.kube/config"
 
 homerun-chaos-catcher
@@ -59,7 +59,7 @@ homerun-chaos-catcher
 ```bash
 VERSION=v1.5.0
 BIN_DIR=/usr/bin
-cd /tmp && wget https://github.com/stuttgart-things/homerun-chaos-catcher/releases/download/${VERSION}}/homerun-chaos-catcher_Linux_x86_64.tar.gz
+cd /tmp && wget https://github.com/stuttgart-things/homerun-chaos-catcher/releases/download/${VERSION}/homerun-chaos-catcher_Linux_x86_64.tar.gz
 tar xvfz homerun-chaos-catcher_Linux_x86_64.tar.gz
 sudo mv homerun-chaos-catcher ${BIN_DIR}/homerun-chaos-catcher
 sudo chmod +x ${BIN_DIR}/homerun-chaos-catcher
