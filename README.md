@@ -42,6 +42,7 @@ export REDIS_PASSWORD=""
 export REDIS_STREAM="homerun"
 export REDIS_CONSUMER_GROUP="homerun-chaos-catcher"
 export PROFILE_PATH="chaos.yaml"
+export TIME_DIFFERENCE_MESSAGES=10
 export KUBECONFIG="/home/sthings/.kube/config"
 
 homerun-chaos-catcher
