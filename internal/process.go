@@ -8,6 +8,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"math"
 	"os"
 	"strconv"
 	"time"
@@ -126,10 +127,10 @@ func messageTimeValid(timestamp, maxDiff int64) (triggerLight bool) {
 	fmt.Println("TIMESTAMP EVENT", timestamp)
 
 	// CALCULATE THE DIFFERENCE IN SECONDS
-	diff := currentTime - timestamp
+	diff := int64(math.Abs(float64(currentTime - timestamp)))
 
 	// CHECK IF THE TIMESTAMP IS WITHIN GIVEN SECONDS OF THE CURRENT TIME
-	if diff >= -maxDiff && diff <= maxDiff {
+	if diff < maxDiff {
 		fmt.Println("IN TIME - FIRE")
 		triggerLight = true
 		return triggerLight
