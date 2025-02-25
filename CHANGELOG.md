@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/stuttgart-things/homerun-chaos-catcher/compare/v1.4.0...v1.4.1) (2025-02-25)
+
+
+### Bug Fixes
+
+* fix/create-release ([ff5e1bc](https://github.com/stuttgart-things/homerun-chaos-catcher/commit/ff5e1bc4850b56ee88fa3f81f04264bfd349637a))
+
 # [1.4.0](https://github.com/stuttgart-things/homerun-chaos-catcher/compare/v1.3.0...v1.4.0) (2025-02-25)
 
 
