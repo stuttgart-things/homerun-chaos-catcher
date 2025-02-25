@@ -74,7 +74,7 @@ func ProcessStreams(msg *redisqueue.Message) error {
 	// CHECK FOR TIMESTAMP
 	ts := sthingsBase.ConvertStringToInteger(eventMessage.Timestamp)
 	timestamp := int64(ts)
-	time_diff, err := strconv.Atoi(os.Getenv("TIME_DIFFERENCE"))
+	time_diff, err := strconv.Atoi(os.Getenv("TIME_DIFFERENCE_MESSAGES"))
 
 	// CREATE KUBERNETES CLIENT (BEFORE EVENT, IF CONNECTION BREAKS)
 	k8sClient := k8s.CreateKubernetesClient(pathToKubeconfig)
