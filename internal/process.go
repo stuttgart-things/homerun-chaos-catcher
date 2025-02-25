@@ -9,6 +9,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/jedib0t/go-pretty/v6/table"
@@ -73,11 +74,12 @@ func ProcessStreams(msg *redisqueue.Message) error {
 	// CHECK FOR TIMESTAMP
 	ts := sthingsBase.ConvertStringToInteger(eventMessage.Timestamp)
 	timestamp := int64(ts)
+	time_diff, err := strconv.Atoi(os.Getenv("TIME_DIFFERENCE"))
 
 	// CREATE KUBERNETES CLIENT (BEFORE EVENT, IF CONNECTION BREAKS)
 	k8sClient := k8s.CreateKubernetesClient(pathToKubeconfig)
 
-	if messageTimeValid(timestamp, 3) {
+	if messageTimeValid(timestamp, int64(time_diff)) {
 
 		for name, chaosConfig := range config.ChaosEvents {
 
