@@ -57,7 +57,7 @@ homerun-chaos-catcher
 <details><summary>BY GITHUB RELEASE</summary>
 
 ```bash
-VERSION=v1.3.0
+VERSION=v1.5.0
 BIN_DIR=/usr/bin
 cd /tmp && wget https://github.com/stuttgart-things/homerun-chaos-catcher/releases/download/${VERSION}}/homerun-chaos-catcher_Linux_x86_64.tar.gz
 tar xvfz homerun-chaos-catcher_Linux_x86_64.tar.gz
