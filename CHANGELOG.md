@@ -1,3 +1,17 @@
+# [1.5.0](https://github.com/stuttgart-things/homerun-chaos-catcher/compare/v1.4.1...v1.5.0) (2025-02-27)
+
+
+### Bug Fixes
+
+* **deps:** update module gopkg.in/yaml.v2 to v3 ([b3c9bc4](https://github.com/stuttgart-things/homerun-chaos-catcher/commit/b3c9bc42d74b12654e3649f21be2a4de59483ded))
+
+
+### Features
+
+* feature/add-add-cmd ([0b7d82e](https://github.com/stuttgart-things/homerun-chaos-catcher/commit/0b7d82ee1963c87489c19355c42891a748ae3d5d))
+* feature/add-add-cmd ([a70a3c7](https://github.com/stuttgart-things/homerun-chaos-catcher/commit/a70a3c7791db34844f90eab948dda681bb31dc7b))
+* main ([20a9889](https://github.com/stuttgart-things/homerun-chaos-catcher/commit/20a98894d719056e34b3fa8f4bd150aad27c152b))
+
 ## [1.4.1](https://github.com/stuttgart-things/homerun-chaos-catcher/compare/v1.4.0...v1.4.1) (2025-02-25)
 
 
