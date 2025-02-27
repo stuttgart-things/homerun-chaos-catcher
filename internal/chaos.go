@@ -25,7 +25,8 @@ func CreateChaos(kind string, count int, operation string, k8sClient *kubernetes
 
 	case "node":
 		fmt.Println("Creating chaos for nodes")
-		// Add logic for node chaos
+		k8s.CorndonUncordonNode(k8sClient)
+
 	default:
 		fmt.Println("Unknown kind")
 		return
