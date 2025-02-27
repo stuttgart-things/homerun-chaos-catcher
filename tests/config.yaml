@@ -2,7 +2,7 @@
 chaosEvents:
   chaos1:
     systems:
-      - tetris # all systems
+      - sthings-tetris # all systems
     severity:
       - CHAOS1
     operation: delete
@@ -11,16 +11,16 @@ chaosEvents:
     namespace: "*" # random namespace
   chaos2:
     systems:
-      - tetris # all systems
+      - sthings-tetris # all systems
     severity:
       - CHAOS2
-    operation: add
+    operation: delete
     count: 1
-    resource: deployment
+    resource: pod
     namespace: "*" # random namespace
   chaos3:
     systems:
-      - tetris # all systems
+      - sthings-tetris # all systems
     severity:
       - CHAOS3
     operation: delete
@@ -29,7 +29,7 @@ chaosEvents:
     namespace: wasteland
   chaos4:
     systems:
-      - tetris # all systems
+      - sthings-tetris # all systems
     severity:
       - CHAOS4
     operation: delete
