@@ -1,3 +1,19 @@
+# [1.6.0](https://github.com/stuttgart-things/homerun-chaos-catcher/compare/v1.5.0...v1.6.0) (2025-06-04)
+
+
+### Bug Fixes
+
+* **deps:** update kubernetes packages to v0.33.1 ([52ddd87](https://github.com/stuttgart-things/homerun-chaos-catcher/commit/52ddd87357e8cbe17de2fd973860eec50d9cf957))
+* **deps:** update module github.com/jedib0t/go-pretty/v6 to v6.6.7 ([0cd6d40](https://github.com/stuttgart-things/homerun-chaos-catcher/commit/0cd6d40896cade769fd843d32936127e3ae29dcd))
+* **deps:** update module github.com/redis/go-redis/v9 to v9.7.3 [security] ([156b6ea](https://github.com/stuttgart-things/homerun-chaos-catcher/commit/156b6ea6d03019d5d207af8e840229843b33c2a3))
+* **deps:** update module gopkg.in/yaml.v2 to v3 ([686991d](https://github.com/stuttgart-things/homerun-chaos-catcher/commit/686991d65921e5cba4cd17c7f761fc4fb3bda6f4))
+* **deps:** update module gopkg.in/yaml.v2 to v3 ([373200f](https://github.com/stuttgart-things/homerun-chaos-catcher/commit/373200f2e262afa2611203b42bfdab31c4a84177))
+
+
+### Features
+
+* feat/add-enq-in-redis-for-deleted-pods ([960ca79](https://github.com/stuttgart-things/homerun-chaos-catcher/commit/960ca794208fc946fdd3a44f6145c32d36bb6f73))
+
 # [1.5.0](https://github.com/stuttgart-things/homerun-chaos-catcher/compare/v1.4.1...v1.5.0) (2025-02-27)
 
 
